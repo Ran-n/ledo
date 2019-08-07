@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	05/08/2019 21:17:48
-#+ Editado:	05/08/2019 23:47:40
+#+ Editado:	06/08/2019 23:09:51
 #------------------------------------------------------------------------------------------------
 import json
 from pathlib import Path
@@ -82,4 +82,27 @@ def read_config():
     else:
     	open(fich, 'w').write(texto_config)
     	return read_config()
+#------------------------------------------------------------------------------------------------
+# recibindo un array con letras e un abecedario vai substituindo cada letra pola súa posición no abecedario
+def letra2num(letras, abc):
+	"""
+	Recibe un lista de letras e devolve unha de posicións das letras dentro do abecedario.
+	> letras: lista das letras das que queremos obter o valor da posición dentro do abecedario
+	> abc: lista de letras dentro do abecedario
+	< lista cos valores posicionais das letras no alfabeto
+	"""
+	# con un bucle vamos recorrendo as letras e as que estén no abecedario metémos a súa posición nun array que devolvemos
+	return [abc.index(elto) for elto in letras if elto in abc]
+#------------------------------------------------------------------------------------------------
+# recibe un array de números e substitueos polas letras correspondentes ás posicións dos mesmos
+def num2letra(numaros, abc):
+	"""
+	Recibe un lista de números e devolve unha cos valores desas posicións dentro do abecedario.
+	> numaros: lista cos números que usaremos para obter os valores dentro do abecedario
+	> abc: lista de letras dentro do abecedario
+	< lista cas letras correspondentes as posicións dadas polos números
+	"""
+	# non miramos que sexa menor cá lonxitude total do abecedario porque non debería darse
+	# a posibilidade pois non é posible que o usuario toque nada entre as operacións de tradución
+	return [abc[ele] for ele in numaros]
 #------------------------------------------------------------------------------------------------

@@ -6,13 +6,28 @@
 #+ Editado:	05/08/2019 23:59:00
 #------------------------------------------------------------------------------------------------
 import utils as u
-import dialogos as d
+import dialogos as dg
+import codificar as c
+import decodificar as dc
 #-----------------------
 import gettext
 import sys
 #------------------------------------------------------------------------------------------------
 def manual():
-    d.k_operacion(_)
+    # facemos que se repita todo até que explicitamente se diga de sair
+    while True:
+        # se non é c só pode ser d
+        if dg.k_operacion(_) == 'c':
+            # pedimoslle a clave
+            chave = dg.k_chave(_)
+            c.codificar('a')
+        else:
+            # pedimoslle a clave
+            chave = dg.k_chave(_)
+
+        # se o usuario presiona o caracter de saida cortamos o bucle
+        if input(_(' *> Presiona '+__carac_saida+' se queres sair: ')) == __carac_saida:
+            break
 #------------------------------------------------------------------------------------------------
 def auto(args):
     print('auto')
@@ -23,6 +38,9 @@ if __name__=="__main__":
 	#en = gettext.translation('caderno-viaxe', localedir='locales', languages=['en'])
 	#en.install()
 	#_ = en.gettext
+
+    # definimos o caracter de saida
+    __carac_saida = '.'
 
     '''
     abc
