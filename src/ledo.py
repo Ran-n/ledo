@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	29/06/2019 23:00:28
-#+ Editado:	09/08/2019 16:45:30
+#+ Editado:	09/08/2019 21:41:54
 #------------------------------------------------------------------------------------------------
 import utils as u
 import dialogos as dg
@@ -25,7 +25,8 @@ def manual():
             # se non continuamos tal cal
 
             # metemos a chave, contido do ficheiro e abecedario para a codificación
-            c.codificar(dg.k_chave(_), texto, __config[__str_abc])
+            codificado = c.codificar(dg.k_chave(_), texto, __config[__str_abc])
+            print(codificado.get_texto_codificado())
         else:
             # pedimoslle a clave
             chave = dg.k_chave(_)
