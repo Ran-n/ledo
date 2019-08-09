@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	05/08/2019 21:17:48
-#+ Editado:	06/08/2019 23:09:51
+#+ Editado:	09/08/2019 15:27:33
 #------------------------------------------------------------------------------------------------
 import json
 from pathlib import Path
@@ -20,7 +20,21 @@ def cargar_json(fich):
 def gardar_json(fich, contido, sort=False):
 	open(fich, 'w').write(json.dumps(contido, indent=1, sort_keys=sort, ensure_ascii=False))
 #------------------------------------------------------------------------------------------------
-# se existe, crea unha carpeta
+# se exsite, carga o ficheiro e devolveo
+def cargar_fich(fich, encoding='utf-8-sig'):
+	# de non existir o ficheiro o que facemos e cargar os refráns de media pois modificamos a dirección de fich
+	if not Path(fich).is_file():
+		fich = '../media/refráns.txt'
+	# abrimos unha conexión de lectura co ficheiro
+	fich_conex = open(fich,"r", encoding=encoding)
+	# lemos o que contén
+	fich_contido = fich_conex.read()
+	# e pechámolo
+	fich_conex.close()
+	# devolvemos o contido do ficheiro
+	return fich_contido
+#------------------------------------------------------------------------------------------------
+# se non existe, crea unha carpeta
 def crear_carp(carp):
 	if Path(carp).is_dir() == False:
 		Path(carp).mkdir(parents=True, exist_ok=True)
@@ -46,18 +60,32 @@ def snValido(resposta):
 		return False, False
 #------------------------------------------------------------------------------------------------
 # función para ler o ficheiro de configuración e devolver as variables adecuadas
-def read_config():
-    texto_config = '''# variables do programa, non cambiar a parte esquerda do mesmo
-    # variable que se encarga de indicar as letras que entran dentro do posible para o programa
-    # se unha letra non está e métese no texto a encriptar será eliminada do texto e encriptarase só cas que estén no abc
-    abc = abcdefghijklmnñopqrstuvwxyz
+def read_config(abc, maiusculas, raiz, fentrada, fsaida, carac_saida):
+    texto_config = '''### FICHEIRO DE CONFIGURACIÓN ###
+## Non cambiar a parte esquerda do mesmo ou producirase un erro.
+## Borrar o ficheiro para restablecer valores orixinais.
 
-    # ficheiro de entrada
-    fentrada = m
+# variable que se encarga de indicar as letras que entran dentro do posible para o programa
+# se unha letra non está e métese no texto a encriptar será eliminada do texto e encriptarase só cas que estén no abc
+'''+abc+''' = abcdefghijklmnñopqrstuvwxyz
 
-    # ficheiro de saida
-    fsaida = c
-    '''
+# indica se queres que se fagan minúsculas as maiúsculas do texto de entrada.
+# Para conservalas como maiúsculas:
+# Para eliminalas facelas minúsculas: "non", "no", "n"
+'''+maiusculas+''' = n
+
+# directorio raiz
+'''+raiz+''' = ..
+
+# ficheiro de entrada
+'''+fentrada+''' = entrada.txt
+
+# ficheiro de saida
+'''+fsaida+''' = saida.txt
+
+# caracter que indica a saída do programa
+'''+carac_saida+''' = .
+'''
     fich = '../.config'
     # se o ficheiro xa existe
     if Path(fich).is_file():
@@ -81,7 +109,7 @@ def read_config():
     # se non existe o que facemos e crealo cos valores por defecto postos na variable e recargar a operacion
     else:
     	open(fich, 'w').write(texto_config)
-    	return read_config()
+    	return read_config(abc, maiusculas, raiz, fentrada, fsaida, carac_saida)
 #------------------------------------------------------------------------------------------------
 # recibindo un array con letras e un abecedario vai substituindo cada letra pola súa posición no abecedario
 def letra2num(letras, abc):

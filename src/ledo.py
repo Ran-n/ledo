@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	29/06/2019 23:00:28
-#+ Editado:	05/08/2019 23:59:00
+#+ Editado:	09/08/2019 15:27:38
 #------------------------------------------------------------------------------------------------
 import utils as u
 import dialogos as dg
@@ -18,15 +18,20 @@ def manual():
     while True:
         # se non é c só pode ser d
         if dg.k_operacion(_) == 'c':
-            # pedimoslle a clave
-            chave = dg.k_chave(_)
-            c.codificar('a')
+            texto = u.cargar_fich(__config[__str_fentrada])
+            # se nos dixeron maiúsculas non facemos todo o texto minúsculo
+            if u.snValido(__config[__str_maiusculas]) == (True, False):
+                texto = texto.lower()
+            # se non continuamos tal cal
+
+            # metemos a chave, contido do ficheiro e abecedario para a codificación
+            c.codificar(dg.k_chave(_), texto, __config[__str_abc])
         else:
             # pedimoslle a clave
             chave = dg.k_chave(_)
 
         # se o usuario presiona o caracter de saida cortamos o bucle
-        if input(_(' *> Presiona '+__carac_saida+' se queres sair: ')) == __carac_saida:
+        if input(_(' *> Presiona '+__config[__str_carac_saida]+' se queres sair: ')) == __config[__str_carac_saida]:
             break
 #------------------------------------------------------------------------------------------------
 def auto(args):
@@ -39,16 +44,25 @@ if __name__=="__main__":
 	#en.install()
 	#_ = en.gettext
 
-    # definimos o caracter de saida
-    __carac_saida = '.'
-
     '''
-    abc
-    fentrada
-    fsaida
+    Contidos da variable diccionario __config
+    abc         -> abecedario
+    raiz        -> carpeta raiz para ler e crear arquivos
+    fentrada    -> ficheiro de entrada
+    fsaida      -> ficheiro de saida
+    carac_saida -> caracter de saida
     '''
-    # lemos o ficheiro de configuración e sacamos os valores
-    __config = u.read_config()
+    __str_abc = 'abc'
+    __str_maiusculas = 'maiusculas'
+    __str_raiz = 'raiz'
+    __str_fentrada = 'fentrada'
+    __str_fsaida = 'fsaida'
+    __str_carac_saida = 'carac_saida'
+    # lemos o ficheiro de configuración e sacamos os valores a un diccionario
+    __config = u.read_config(__str_abc, __str_maiusculas, __str_raiz, __str_fentrada, __str_fsaida, __str_carac_saida)
+    # aseguramonos de que o ficheiro teña ben posto o nome ao estar coa raiz antes
+    __config[__str_fentrada] = __config[__str_raiz] +'/'+ __config[__str_fentrada]
+    __config[__str_fsaida] = __config[__str_raiz] +'/'+ __config[__str_fsaida]
 
     # parte lóxica que se encarga de mandar á función de manual ou automatico
     if len(sys.argv)>1:
