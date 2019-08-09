@@ -17,22 +17,26 @@ class codificar:
         #collemos o valor da lonxitude do texto en plano
         self.__lonxitude_texto = len(self.__texto_ini)
         #definimos e inicializamos a lonxitude da lista a devolver
-        self.__texto_trasposto = [None] * len(self.__texto_ini)
+        self.__texto_transposto = [None] * len(self.__texto_ini)
         self.__autochave = None
         self.__texto_codificado = None
 
         self.codificacion()
 
-        #print(self.__texto_trasposto)
+        print(self.__texto_codificado)
+        print(len(self.__abc))
 #------------------------------------------------------------------------------------------------
     # función que se encarga de realizar todos os pasos individuais e inaccsibles dende fora da codificación
     def codificacion(self):
         # primeiro facemos a transposición, o cal neste caso é a republicana
         self.__transposicion_republicana()
-        # utilizando os caracteres transpostos crease a autoclave do estilo da de vigenere
-        # pasase a chave e o texto transposto aos seus valores numéricos
+        # utilizando os caracteres transpostos crease a autochave do estilo da de vigenere
+        self.__crear_autochave()
 
+        # pasase a chave e o texto transposto aos seus valores numéricos
         # obtemos os números da mensaxe codificada facendo a suma de chave e texto transposto
+        self.__suma_modulada()
+
         # pasamos eses números a caracteres dentro do abecedario e retornamos o valor
 #------------------------------------------------------------------------------------------------
     '''Move as letras do principio co final e colocaas primeiro a última e logo a primeira
@@ -58,9 +62,15 @@ class codificar:
             ini = list(self.__texto_ini[:metade__])
             fin = list(caracs_contrario[:metade__])
 
-        self.__texto_trasposto[::2] = fin
-        self.__texto_trasposto[1::2] = ini
+        self.__texto_transposto[::2] = fin
+        self.__texto_transposto[1::2] = ini
 #------------------------------------------------------------------------------------------------
-def __crear_autoclave(self):
-    
+    def __crear_autochave(self):
+        self.__autochave = list(self.__chave_ini+self.__texto_transposto)[:self.__lonxitude_texto]
+#------------------------------------------------------------------------------------------------
+    # operación que se encarga de sumar os dous valores de entrada e devolver un número de resultado dentro da lónxitude do abc
+    def __suma_modulada(self):
+        #facemola suma
+        #facemos o módulo
+        self.__texto_codificado = [x%len(self.__abc) for x in [y+z for y,z in zip(u.letra2num(self.__texto_transposto, self.__abc), u.letra2num(self.__autochave, self.__abc))]]
 #------------------------------------------------------------------------------------------------
