@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	07/08/2019 21:27:20
-#+ Editado:	07/08/2019 21:27:20
+#+ Editado:	09/08/2019 16:45:21
 #------------------------------------------------------------------------------------------------
 import utils as u
 #------------------------------------------------------------------------------------------------
@@ -18,11 +18,13 @@ class codificar:
         self.__lonxitude_texto = len(self.__texto_ini)
         #definimos e inicializamos a lonxitude da lista a devolver
         self.__texto_trasposto = [None] * len(self.__texto_ini)
+        self.__autochave = None
+        self.__texto_codificado = None
 
         self.codificacion()
 
-        print(self.__texto_trasposto)
-
+        #print(self.__texto_trasposto)
+#------------------------------------------------------------------------------------------------
     # función que se encarga de realizar todos os pasos individuais e inaccsibles dende fora da codificación
     def codificacion(self):
         # primeiro facemos a transposición, o cal neste caso é a republicana
@@ -32,7 +34,7 @@ class codificar:
 
         # obtemos os números da mensaxe codificada facendo a suma de chave e texto transposto
         # pasamos eses números a caracteres dentro do abecedario e retornamos o valor
-
+#------------------------------------------------------------------------------------------------
     '''Move as letras do principio co final e colocaas primeiro a última e logo a primeira
     Por exemplo:
     indixena
@@ -58,4 +60,7 @@ class codificar:
 
         self.__texto_trasposto[::2] = fin
         self.__texto_trasposto[1::2] = ini
+#------------------------------------------------------------------------------------------------
+def __crear_autoclave(self):
+    
 #------------------------------------------------------------------------------------------------
