@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	05/08/2019 21:17:48
-#+ Editado:	10/08/2019 17:42:05
+#+ Editado:	11/08/2019 01:23:57
 #------------------------------------------------------------------------------------------------
 import json
 from pathlib import Path
@@ -64,40 +64,64 @@ def snValido(resposta):
 		return False, False
 #------------------------------------------------------------------------------------------------
 # función para ler o ficheiro de configuración e devolver as variables adecuadas
-def read_config(abc, maiusculas, raiz, entradax, saidax, fentrada, fsaida, carac_saida):
+def read_config(abc, maiusculas, raiz, lang, entradax, saidax, fentrada, fsaida, carac_saida):
     texto_config = '''### FICHEIRO DE CONFIGURACIÓN ###
-## Non cambiar a parte esquerda do mesmo ou producirase un erro.
+## Non cambiar a parte esquerda do igual ou producirase un erro.
 ## Borrar o ficheiro para restablecer valores orixinais.
+### CONFIGURATION FILE ###
+## Do not change the left part of the equality sign or an error will occur.
+## Remove the file to set the original values back.
 
-# variable que se encarga de indicar as letras que entran dentro do posible para o programa
-# se unha letra non está e métese no texto a encriptar será eliminada do texto e encriptarase só cas que estén no abc
+# Variable que se encarga de indicar as letras que serán usadas para encriptar e desencriptar.
+# se unha letra non está e métese no texto a encriptar será eliminada do texto e encriptarase só cas que estén no abc.
+# Variable to set the letters that will be used to encrypt and decrypt.
+# if a letter is not in this variable and appears on the text it will be removed at encryption/decryption time.
 '''+abc+''' = abcdefghijklmnñopqrstuvwxyz
 
-# indica se queres que se fagan minúsculas as maiúsculas do texto de entrada.
-# Para conservalas como maiúsculas: "si", "s", "yes", "y"
-# Para eliminalas facelas minúsculas: "non", "no", "n"
+# Indica se queres que se fagan minúsculas as maiúsculas do texto de entrada.
+# Para conservalas como maiúsculas: "si", "s", "yes", "y".
+# Para facelas minúsculas: "non", "no", "n".
+# Tells the program if you want to make the upper case letters in the text into lower case.
+# To keep them as upper case: "si", "s", "yes", "y".
+# To convert them into lower case: "non", "no", "n".
 '''+maiusculas+''' = s
 
-# directorio raiz
+# Directorio raiz.
+# Root directory.
 '''+raiz+''' = ..
 
-# indica se se colle o texto de entrada de ficheiro ou terminal
-# Para coller datos por ficheiro: "si", "s", "yes", "y"
-# Para coller datos por pantalla: "non", "no", "n"
+# Indica o idioma dos diálogos.
+# Idiomas permitidos: inglés (en), galego (gl), español (es).
+# Sets the language for the dialogs.
+# Allowed languages: english (en), gallician(gl), spanish (es).
+'''+lang+''' = gl
+
+# Indica se se colle o texto de entrada de ficheiro ou de entrada estándard.
+# Para coller datos por ficheiro: "si", "s", "yes", "y".
+# Para coller datos por pantalla: "non", "no", "n".
+# Variable that indicates whether the text to encrypt/decrypt comes from a file or standard input (stdin).
+# To get the text from a file: "si", "s", "yes", "y".
+# To get the text from stdin: "non", "no", "n".
 '''+entradax+''' = s
 
-# indica se se mostra o texto de saida en ficheiro ou terminal
-# Para sacar datos por ficheiro: "si", "s", "yes", "y"
-# Para sacar datos por pantalla: "non", "no", "n"
+# indica se se mostra o texto de saida en ficheiro ou de saida estándard.
+# Para sacar datos por ficheiro: "si", "s", "yes", "y".
+# Para sacar datos por pantalla: "non", "no", "n".
+# Variable that indicates whether the text to encrypt/decrypt goes to a file or standard output (stdout).
+# To set the text to a file: "si", "s", "yes", "y".
+# To set the text to stdout: "non", "no", "n".
 '''+saidax+''' = s
 
-# nome do ficheiro de entrada
+# Nome do ficheiro de entrada de ser usado.
+# Name of the input file if any.
 '''+fentrada+''' = entrada.txt
 
-# nome do ficheiro de saida
+# Nome do ficheiro de saida de ser usado.
+# Name of the output file if any.
 '''+fsaida+''' = saida.txt
 
-# caracter que indica a saída do programa
+# Caracter que indica a saída do programa.
+# Character to indicate the exit of the program.
 '''+carac_saida+''' = .
 '''
     fich = '../.config'
@@ -123,7 +147,7 @@ def read_config(abc, maiusculas, raiz, entradax, saidax, fentrada, fsaida, carac
     # se non existe o que facemos e crealo cos valores por defecto postos na variable e recargar a operacion
     else:
     	open(fich, 'w').write(texto_config)
-    	return read_config(abc, maiusculas, raiz, entradax, saidax, fentrada, fsaida, carac_saida)
+    	return read_config(abc, maiusculas, raiz, lang, entradax, saidax, fentrada, fsaida, carac_saida)
 #------------------------------------------------------------------------------------------------
 # recibindo un array con letras e un abecedario vai substituindo cada letra pola súa posición no abecedario
 def letra2num(letras, abc):

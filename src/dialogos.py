@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	05/08/2019 23:50:00
-#+ Editado:	10/08/2019 17:42:00
+#+ Editado:	11/08/2019 00:22:16
 #------------------------------------------------------------------------------------------------
 # diálogo que pide que lle metas o tipo de operación a realizar, pasamoslle o couso do gettext
 def k_operacion(_):
@@ -20,9 +20,11 @@ def k_operacion(_):
             break
     return op__
 #------------------------------------------------------------------------------------------------
+# dialogo para preguntar ao usuario pola chave de cifrado ou descifrado
 def k_chave(_):
     return input(_(' > Chave de cifrado: '))
 #------------------------------------------------------------------------------------------------
+# dialogo para indicar o texto a cifrar ou descifrar
 def k_texto_codificar(_):
     return input(_(' > Texto a cifrar ou descifrar: '))
 #------------------------------------------------------------------------------------------------

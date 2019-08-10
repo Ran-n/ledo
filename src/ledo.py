@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	29/06/2019 23:00:28
-#+ Editado:	10/08/2019 17:42:11
+#+ Editado:	11/08/2019 01:23:51
 #------------------------------------------------------------------------------------------------
 import utils as u
 import dialogos as dg
@@ -91,16 +91,14 @@ def auto(args):
         exit()
 #------------------------------------------------------------------------------------------------
 if __name__=="__main__":
-    # fai que colla o idioma por defecta da persoa de entre as traduccións que hai
-    _ = gettext.gettext
-	#en = gettext.translation('caderno-viaxe', localedir='locales', languages=['en'])
-	#en.install()
-	#_ = en.gettext
-
     '''
     Contidos da variable diccionario __config
     abc         -> abecedario
+    maiusculas  -> determina se se cambian as maiúsculas por minúsculas no texto de entrada
     raiz        -> carpeta raiz para ler e crear arquivos
+    lang        -> indica o idioma de saida na versión con diálogos
+    entradax    -> determina se a entrada e por ficheiro ou stdin
+    saidax      -> determina se a saida e por ficheiro ou stdout
     fentrada    -> ficheiro de entrada
     fsaida      -> ficheiro de saida
     carac_saida -> caracter de saida
@@ -108,27 +106,35 @@ if __name__=="__main__":
     __str_abc = 'abc'
     __str_maiusculas = 'maiusculas'
     __str_raiz = 'raiz'
+    __str_lang = 'lang'
     __str_entradax = 'entrada_x_fich'
     __str_saidax = 'saida_x_fich'
     __str_fentrada = 'fentrada'
     __str_fsaida = 'fsaida'
     __str_carac_saida = 'carac_saida'
     # lemos o ficheiro de configuración e sacamos os valores a un diccionario
-    __config = u.read_config(__str_abc, __str_maiusculas, __str_raiz, __str_entradax, __str_saidax, __str_fentrada, __str_fsaida, __str_carac_saida)
+    __config = u.read_config(__str_abc, __str_maiusculas, __str_raiz, __str_lang, __str_entradax, __str_saidax, __str_fentrada, __str_fsaida, __str_carac_saida)
     # aseguramonos de que o ficheiro teña ben posto o nome ao estar coa raiz antes
     __config[__str_fentrada] = __config[__str_raiz] +'/'+ __config[__str_fentrada]
     __config[__str_fsaida] = __config[__str_raiz] +'/'+ __config[__str_fsaida]
 
+    # fai que colla o idioma por defecta da persoa de entre as traduccións que hai
+    _ = gettext.gettext
+    #en = gettext.translation('caderno-viaxe', localedir='locales', languages=['en'])
+    #en.install()
+    #_ = en.gettext
+
     # parte lóxica que se encarga de mandar á función de manual ou automatico
     if len(sys.argv)>1:
         if sys.argv[1]=='-?':
-            print(_("\nExecución: 'python3 main.py -c/-d -p password'"))
-            print(_(" -c = codificar"))
-            print(_(" -d = descodificar"))
+            print(_("\nExecución: 'python3 main.py -c/-d -p password [-e texto_entrada] [-i]'"))
+            print(_(' -c = codificar'))
+            print(_(' -d = descodificar'))
+            print(_(' -e texto_entrada = '))
             print(_(" -p contrasinal = contrasinal\n"))
 
         elif sys.argv[1]=='-h':
-        	print(_("\nExecución: 'python3 main.py -c/-d -p password'\n"))
+        	print(_("\nExecución: 'python3 main.py -c/-d -p password [-e texto_entrada] [-i]'\n"))
 
         elif len(sys.argv)>3:
         	auto(sys.argv[1:])
