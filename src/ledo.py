@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	29/06/2019 23:00:28
-#+ Editado:	09/08/2019 21:41:54
+#+ Editado:	10/08/2019 13:31:50
 #------------------------------------------------------------------------------------------------
 import utils as u
 import dialogos as dg
@@ -14,29 +14,55 @@ import gettext
 import sys
 #------------------------------------------------------------------------------------------------
 def manual():
+    # o texto a codificar ou decodificar probén do ficheiro de entrada
+    texto__ = u.cargar_fich(__config[__str_fentrada])
     # facemos que se repita todo até que explicitamente se diga de sair
     while True:
         # se non é c só pode ser d
         if dg.k_operacion(_) == 'c':
-            texto = u.cargar_fich(__config[__str_fentrada])
             # se nos dixeron maiúsculas non facemos todo o texto minúsculo
-            if u.snValido(__config[__str_maiusculas]) == (True, False):
-                texto = texto.lower()
             # se non continuamos tal cal
+            if u.snValido(__config[__str_maiusculas]) == (True, False):
+                texto__ = texto__.lower()
 
             # metemos a chave, contido do ficheiro e abecedario para a codificación
-            codificado = c.codificar(dg.k_chave(_), texto, __config[__str_abc])
-            print(codificado.get_texto_codificado())
+            cod = c.codificar(dg.k_chave(_), texto__, __config[__str_abc])
+            resultado__ = cod.get_texto_codificado()
         else:
-            # pedimoslle a clave
-            chave = dg.k_chave(_)
+            # pedimoslle a clave e metemola xunto co contido do ficheiro e abecedario para a codificación
+            decod = dc.decodificar(dg.k_chave(_), texto__, __config[__str_abc])
+            resultado__ = decod.get_texto_decodificado()
+
+        # garda no ficheiro de saida o resultado
+        u.gardar_fich(__config[__str_fsaida], resultado__)
 
         # se o usuario presiona o caracter de saida cortamos o bucle
         if input(_(' *> Presiona '+__config[__str_carac_saida]+' se queres sair: ')) == __config[__str_carac_saida]:
             break
 #------------------------------------------------------------------------------------------------
 def auto(args):
-    print('auto')
+    # o texto a codificar ou decodificar probén do ficheiro de entrada
+    texto__ = u.cargar_fich(__config[__str_fentrada])
+
+    if '-p' in args:
+        contrasinal = list(args[args.index('-p')+1])
+        if '-c' in args:
+            # se nos dixeron maiúsculas non facemos todo o texto minúsculo
+            # se non continuamos tal cal
+            if u.snValido(__config[__str_maiusculas]) == (True, False):
+                texto__ = texto__.lower()
+
+            # metemos a chave, contido do ficheiro e abecedario para a codificación
+            cod = c.codificar(contrasinal, texto__, __config[__str_abc])
+            resultado__ = cod.get_texto_codificado()
+
+        elif '-d' in args:
+            # pedimoslle a clave e metemola xunto co contido do ficheiro e abecedario para a codificación
+            decod = dc.decodificar(contrasinal, texto__, __config[__str_abc])
+            resultado__ = decod.get_texto_decodificado()
+
+        # garda no ficheiro de saida o resultado, só se mete a opción da chave
+        u.gardar_fich(__config[__str_fsaida], resultado__)
 #------------------------------------------------------------------------------------------------
 if __name__=="__main__":
     # fai que colla o idioma por defecta da persoa de entre as traduccións que hai
@@ -68,15 +94,13 @@ if __name__=="__main__":
     # parte lóxica que se encarga de mandar á función de manual ou automatico
     if len(sys.argv)>1:
         if sys.argv[1]=='-?':
-            print(_("\nExecución: 'python3 ledo.py -c/-d [-e entrada] [-s saida] -p password'"))
+            print(_("\nExecución: 'python3 main.py -c/-d -p password'"))
             print(_(" -c = codificar"))
             print(_(" -d = descodificar"))
-            print(_(" [-e fich] = [opcional] entrada.txt por defecto"))
-            print(_(" [-s fich] = [opcional] saida.txt por defecto"))
             print(_(" -p contrasinal = contrasinal\n"))
 
         elif sys.argv[1]=='-h':
-        	print(_("\nExecución: 'python3 ledo.py -c/-d [-e entrada] [-s saida] -p password'\n"))
+        	print(_("\nExecución: 'python3 main.py -c/-d -p password'\n"))
 
         elif len(sys.argv)>3:
         	auto(sys.argv[1:])

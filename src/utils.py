@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	05/08/2019 21:17:48
-#+ Editado:	09/08/2019 21:41:42
+#+ Editado:	10/08/2019 01:24:20
 #------------------------------------------------------------------------------------------------
 import json
 from pathlib import Path
@@ -33,6 +33,10 @@ def cargar_fich(fich, encoding='utf-8-sig'):
 	fich_conex.close()
 	# devolvemos o contido do ficheiro
 	return fich_contido
+#------------------------------------------------------------------------------------------------
+# gardamos nun ficheiro o contido na variable contido
+def gardar_fich(fich, contido, encoding='utf-8-sig'):
+	saida = open(fich, "w", encoding=encoding).write(contido)
 #------------------------------------------------------------------------------------------------
 # se non existe, crea unha carpeta
 def crear_carp(carp):
@@ -70,17 +74,21 @@ def read_config(abc, maiusculas, raiz, fentrada, fsaida, carac_saida):
 '''+abc+''' = abcdefghijklmnñopqrstuvwxyz
 
 # indica se queres que se fagan minúsculas as maiúsculas do texto de entrada.
-# Para conservalas como maiúsculas:
+# Para conservalas como maiúsculas: "si", "s", "yes", "y"
 # Para eliminalas facelas minúsculas: "non", "no", "n"
-'''+maiusculas+''' = n
+'''+maiusculas+''' = s
 
 # directorio raiz
 '''+raiz+''' = ..
 
-# ficheiro de entrada
+# indica se se colle o texto de entrada de ficheiro ou terminal
+
+# indica se se mostra o texto de saida en ficheiro ou terminal
+
+# nome do ficheiro de entrada
 '''+fentrada+''' = entrada.txt
 
-# ficheiro de saida
+# nome do ficheiro de saida
 '''+fsaida+''' = saida.txt
 
 # caracter que indica a saída do programa

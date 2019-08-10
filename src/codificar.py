@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	07/08/2019 21:27:20
-#+ Editado:	09/08/2019 21:41:46
+#+ Editado:	10/08/2019 01:23:08
 #------------------------------------------------------------------------------------------------
 import utils as u
 #------------------------------------------------------------------------------------------------
@@ -12,6 +12,7 @@ class codificar:
     # todas as variables son strings
     def __init__(self, chave_ini, texto_ini, abc):
         self.__abc = list(abc)
+        # aqui non é preciso cortar pois xa se corta ao facer a función autochave
         self.__chave_ini = [ele for ele in list(chave_ini) if ele in self.__abc]
         self.__texto_ini = [ele for ele in list(texto_ini) if ele in self.__abc]
         #collemos o valor da lonxitude do texto en plano
@@ -20,11 +21,9 @@ class codificar:
         self.__texto_transposto = [None] * len(self.__texto_ini)
         self.__autochave = None
         self.__texto_codificado = None
-
-        self.codificacion()
 #------------------------------------------------------------------------------------------------
     # función que se encarga de realizar todos os pasos individuais e inaccsibles dende fora da codificación
-    def codificacion(self):
+    def __codificacion(self):
         # primeiro facemos a transposición, o cal neste caso é a republicana
         self.__transposicion_republicana()
         # utilizando os caracteres transpostos crease a autochave do estilo da de vigenere
@@ -75,6 +74,8 @@ class codificar:
         #facemos o módulo
         self.__texto_codificado = [x%len(self.__abc) for x in [y+z for y,z in zip(u.letra2num(self.__texto_transposto, self.__abc), u.letra2num(self.__autochave, self.__abc))]]
 #------------------------------------------------------------------------------------------------
+    # función que chama á operación de codificación e devolve o texto codificado
     def get_texto_codificado(self):
+        self.__codificacion()
         return self.__texto_codificado
 #------------------------------------------------------------------------------------------------
