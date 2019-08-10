@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	05/08/2019 21:17:48
-#+ Editado:	10/08/2019 01:24:20
+#+ Editado:	10/08/2019 17:42:05
 #------------------------------------------------------------------------------------------------
 import json
 from pathlib import Path
@@ -64,7 +64,7 @@ def snValido(resposta):
 		return False, False
 #------------------------------------------------------------------------------------------------
 # función para ler o ficheiro de configuración e devolver as variables adecuadas
-def read_config(abc, maiusculas, raiz, fentrada, fsaida, carac_saida):
+def read_config(abc, maiusculas, raiz, entradax, saidax, fentrada, fsaida, carac_saida):
     texto_config = '''### FICHEIRO DE CONFIGURACIÓN ###
 ## Non cambiar a parte esquerda do mesmo ou producirase un erro.
 ## Borrar o ficheiro para restablecer valores orixinais.
@@ -82,8 +82,14 @@ def read_config(abc, maiusculas, raiz, fentrada, fsaida, carac_saida):
 '''+raiz+''' = ..
 
 # indica se se colle o texto de entrada de ficheiro ou terminal
+# Para coller datos por ficheiro: "si", "s", "yes", "y"
+# Para coller datos por pantalla: "non", "no", "n"
+'''+entradax+''' = s
 
 # indica se se mostra o texto de saida en ficheiro ou terminal
+# Para sacar datos por ficheiro: "si", "s", "yes", "y"
+# Para sacar datos por pantalla: "non", "no", "n"
+'''+saidax+''' = s
 
 # nome do ficheiro de entrada
 '''+fentrada+''' = entrada.txt
@@ -117,7 +123,7 @@ def read_config(abc, maiusculas, raiz, fentrada, fsaida, carac_saida):
     # se non existe o que facemos e crealo cos valores por defecto postos na variable e recargar a operacion
     else:
     	open(fich, 'w').write(texto_config)
-    	return read_config(abc, maiusculas, raiz, fentrada, fsaida, carac_saida)
+    	return read_config(abc, maiusculas, raiz, entradax, saidax, fentrada, fsaida, carac_saida)
 #------------------------------------------------------------------------------------------------
 # recibindo un array con letras e un abecedario vai substituindo cada letra pola súa posición no abecedario
 def letra2num(letras, abc):
