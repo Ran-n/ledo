@@ -3,12 +3,13 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	29/06/2019 23:00:28
-#+ Editado:	11/08/2019 01:23:51
+#+ Editado:	11/08/2019 16:17:39
 #------------------------------------------------------------------------------------------------
 import utils as u
 import dialogos as dg
 import codificar as c
 import decodificar as dc
+import traduccions as t
 #-----------------------
 import gettext
 import sys
@@ -44,10 +45,10 @@ def manual():
             # garda no ficheiro de saida o resultado
             u.gardar_fich(__config[__str_fsaida], resultado__)
         else:
-            print('*> Resultado:\t', resultado__)
+            print(_('*> Resultado:\t'), resultado__)
 
         # se o usuario presiona o caracter de saida cortamos o bucle
-        if input(_('\n*> Presiona '+__config[__str_carac_saida]+' se queres sair: ')) == __config[__str_carac_saida]:
+        if input(_('\n*> Presiona {} se queres sair do programa: ').format(__config[__str_carac_saida])) == __config[__str_carac_saida]:
             break
 #------------------------------------------------------------------------------------------------
 def auto(args):
@@ -90,6 +91,10 @@ def auto(args):
     else:
         exit()
 #------------------------------------------------------------------------------------------------
+# función que se encarga de chamar ao obxecto de traducción
+def _(string):
+    return traduccions.traducir(string)
+#------------------------------------------------------------------------------------------------
 if __name__=="__main__":
     '''
     Contidos da variable diccionario __config
@@ -118,29 +123,26 @@ if __name__=="__main__":
     __config[__str_fentrada] = __config[__str_raiz] +'/'+ __config[__str_fentrada]
     __config[__str_fsaida] = __config[__str_raiz] +'/'+ __config[__str_fsaida]
 
-    # fai que colla o idioma por defecta da persoa de entre as traduccións que hai
-    _ = gettext.gettext
-    #en = gettext.translation('caderno-viaxe', localedir='locales', languages=['en'])
-    #en.install()
-    #_ = en.gettext
+    # creamos a instancia da clase que se encargará de traducir os strings
+    traduccions = t.traductora(__config[__str_lang])
 
     # parte lóxica que se encarga de mandar á función de manual ou automatico
     if len(sys.argv)>1:
         if sys.argv[1]=='-?':
-            print(_("\nExecución: 'python3 main.py -c/-d -p password [-e texto_entrada] [-i]'"))
+            print(_("\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]''"))
             print(_(' -c = codificar'))
             print(_(' -d = descodificar'))
-            print(_(' -e texto_entrada = '))
-            print(_(" -p contrasinal = contrasinal\n"))
+            print(_(' -e texto_entrada = texto a codificar ou decodificar'))
+            print(_(' -p contrasinal = contrasinal\n'))
 
         elif sys.argv[1]=='-h':
-        	print(_("\nExecución: 'python3 main.py -c/-d -p password [-e texto_entrada] [-i]'\n"))
+        	print(_("\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]\n'"))
 
         elif len(sys.argv)>3:
         	auto(sys.argv[1:])
 
         else:
-        	print(_("Dame máis argumentos ou separa os que xa tes"))
+        	print(_('Dame máis argumentos ou separa os que xa tes.'))
     else:
         manual()
 #------------------------------------------------------------------------------------------------

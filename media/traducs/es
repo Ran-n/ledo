@@ -1,0 +1,14 @@
+{
+  "\n*> Presiona {} se queres sair do programa: ": "\n*> Presiona {} si quieres salir del programa: ",
+  "*> Resultado:\t": "*> Resultado:\t",
+  "\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]'": "\nEjecución: 'python3 main.py -c/-d -p contraseña [-e texto_entrada] [-i]'",
+  " -c = codificar": " -c = codificar",
+  " -d = descodificar": " -d = descodificar",
+  " -e texto_entrada = texto a codificar ou decodificar": " -e texto_entrada = texto a codificar o decodificar",
+  " -p contrasinal = contrasinal\n": " -p contraseña = contraseña\n",
+  "\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]'\n": "\nEjecución: 'python3 main.py -c/-d -p contaseña [-e texto_entrada] [-i]'\n",
+  "Dame máis argumentos ou separa os que xa tes.": "Dame más argumentos o separa los que ya tienes.",
+  " > Codificas(c) ou decodificas(d)?: ": " > Codificas(c) o decodificas(d)?: ",
+  " > Chave de cifrado: ": " > Clave de cifrado: ",
+  " > Texto a cifrar ou descifrar: ": " > Texto a cifrar o descifrar: "
+}
