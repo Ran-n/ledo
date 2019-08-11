@@ -24,7 +24,7 @@ def gardar_json(fich, contido, sort=False):
 def cargar_fich(fich, encoding='utf-8-sig'):
 	# de non existir o ficheiro o que facemos e cargar os refráns de media pois modificamos a dirección de fich
 	if not Path(fich).is_file():
-		fich = '../media/refráns.txt'
+		fich = '../media/refráns'
 	# abrimos unha conexión de lectura co ficheiro
 	fich_conex = open(fich,"r", encoding=encoding)
 	# lemos o que contén
