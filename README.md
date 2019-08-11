@@ -19,6 +19,7 @@ A important change might be to the language (its set to gallician by default), o
 
 ## Execution
 You can execute the following 'python3 main.py -h' or 'python3 main.py -?' to get the description of the elements for the command form of the program. If you opt for the interactive form the messages will be self explanatory.  
+  
 The main.py, or main.bat only pass the execution onto the ledo.py in the src folder so you could directly execute the src/ledo.py file, but some file directories have been hardcoded taking into account the folder position of src as the working directory (.) so make sure to cd to src before doing "python3 ledo.py" or the execution will result in a error. 
 ### For the command version
 python3 main.py -c/-d -p password {-e entry text} {-i}  
