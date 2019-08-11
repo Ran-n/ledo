@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	29/06/2019 23:00:28
-#+ Editado:	11/08/2019 16:17:39
+#+ Editado:	11/08/2019 17:35:15
 #------------------------------------------------------------------------------------------------
 import utils as u
 import dialogos as dg
@@ -120,6 +120,7 @@ if __name__=="__main__":
     # lemos o ficheiro de configuración e sacamos os valores a un diccionario
     __config = u.read_config(__str_abc, __str_maiusculas, __str_raiz, __str_lang, __str_entradax, __str_saidax, __str_fentrada, __str_fsaida, __str_carac_saida)
     # aseguramonos de que o ficheiro teña ben posto o nome ao estar coa raiz antes
+    __config[__str_abc] = u.especiais_abc(list(__config[__str_abc]))
     __config[__str_fentrada] = __config[__str_raiz] +'/'+ __config[__str_fentrada]
     __config[__str_fsaida] = __config[__str_raiz] +'/'+ __config[__str_fsaida]
 
@@ -129,14 +130,14 @@ if __name__=="__main__":
     # parte lóxica que se encarga de mandar á función de manual ou automatico
     if len(sys.argv)>1:
         if sys.argv[1]=='-?':
-            print(_("\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]''"))
+            print(_("\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]'"))
             print(_(' -c = codificar'))
             print(_(' -d = descodificar'))
             print(_(' -e texto_entrada = texto a codificar ou decodificar'))
             print(_(' -p contrasinal = contrasinal\n'))
 
         elif sys.argv[1]=='-h':
-        	print(_("\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]\n'"))
+        	print(_("\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]'\n"))
 
         elif len(sys.argv)>3:
         	auto(sys.argv[1:])

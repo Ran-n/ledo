@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	07/08/2019 21:27:20
-#+ Editado:	10/08/2019 01:23:08
+#+ Editado:	11/08/2019 19:14:59
 #------------------------------------------------------------------------------------------------
 import utils as u
 #------------------------------------------------------------------------------------------------
@@ -11,7 +11,7 @@ class codificar:
     # función inicial que recolle as variables pasadas e as pon dentro do obxecto
     # todas as variables son strings
     def __init__(self, chave_ini, texto_ini, abc):
-        self.__abc = list(abc)
+        self.__abc = abc
         # aqui non é preciso cortar pois xa se corta ao facer a función autochave
         self.__chave_ini = [ele for ele in list(chave_ini) if ele in self.__abc]
         self.__texto_ini = [ele for ele in list(texto_ini) if ele in self.__abc]
@@ -41,9 +41,6 @@ class codificar:
     indixena
     ainnedxi'''
     def __transposicion_republicana(self):
-        #creamos outra lista co mesmo valor ca inicial pero cos valores revertidos
-        caracs_contrario = list(self.__texto_ini)
-        caracs_contrario.reverse()
         # número que indica o valor do medio da lonxitude do texto
         metade__ = int(self.__lonxitude_texto/2)
 
@@ -52,12 +49,16 @@ class codificar:
             #agora esas listas incial e revertida truncámolas á metade dos caracteres
             ini = list(self.__texto_ini[:metade__])
             #á final engadímoslle a do medio
-            fin = list(caracs_contrario[:metade__+1])
+            fin = list(self.__texto_ini[metade__:])
         # lonxitude par
         else:
             #agora esas listas incial e revertida truncámolas á metade dos caracteres
             ini = list(self.__texto_ini[:metade__])
-            fin = list(caracs_contrario[:metade__])
+            fin = list(self.__texto_ini[metade__:])
+
+        # damoslle a volta aos caracteres da lista final para comezar poñendo as letras da
+        # lista inicial polo final desa lista
+        fin.reverse()
 
         # vamos poñendo na lista final os da parte fina de 2 en dous comezando na posición 0
         self.__texto_transposto[::2] = fin

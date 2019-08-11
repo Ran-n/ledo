@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	09/08/2019 23:33:38
-#+ Editado:	10/08/2019 17:27:11
+#+ Editado:	11/08/2019 16:55:29
 #------------------------------------------------------------------------------------------------
 import utils as u
 #------------------------------------------------------------------------------------------------
@@ -11,7 +11,7 @@ class decodificar:
     # función inicial que recolle as variables pasadas e as pon dentro do obxecto
     # todas as variables son strings
     def __init__(self, chave_ini, texto_ini, abc):
-        self.__abc = list(abc)
+        self.__abc = abc
         self.__texto_ini = [ele for ele in list(texto_ini) if ele in self.__abc]
         #collemos o valor da lonxitude do texto en plano
         self.__lonxitude_texto = len(self.__texto_ini)
@@ -65,7 +65,10 @@ class decodificar:
         if  lonx_chave__< self.__lonxitude_texto:
             # para cada elemento da chave facemos a resta se a lonxitude non é a adecuada
             for index, elto in enumerate(self.__autochave):
-                    if lonx_chave__+index<self.__lonxitude_texto:
+                    '''haille que restar un á lonxitude do texto se non creame un
+                    caracter no medio extra sen sentido ningún.
+                    '''
+                    if lonx_chave__+index<self.__lonxitude_texto-1:
                         ''' facemos a resta do elemento co seu correspondente módulo e
                         engadímolo á autochave para que continue ata a lonxitude do texto'''
                         self.__autochave.append(((self.__texto_decodificado[lonx_chave__+index] - elto)%len(self.__abc)))

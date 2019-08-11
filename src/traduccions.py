@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	11/08/2019 15:33:43
-#+ Editado:	11/08/2019 16:17:15
+#+ Editado:	11/08/2019 18:20:55
 #------------------------------------------------------------------------------------------------
 import utils as u
 #------------------------------------------------------------------------------------------------
@@ -11,8 +11,8 @@ class traductora:
     # clase constructora, pasamoslle o idioma que usaremos para discernir os strings
     def __init__(self, lang):
         self.lang = lang
-        self.en = u.cargar_json('../media/traducs/en')
-        self.es =u.cargar_json('../media/traducs/es')
+        self.en = u.cargar_json('../media/traducs/en.json')
+        self.es =u.cargar_json('../media/traducs/es.json')
 
     def traducir(self, string):
         if self.lang == 'gl':

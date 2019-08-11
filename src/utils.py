@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	05/08/2019 21:17:48
-#+ Editado:	11/08/2019 01:23:57
+#+ Editado:	11/08/2019 17:58:48
 #------------------------------------------------------------------------------------------------
 import json
 from pathlib import Path
@@ -74,9 +74,12 @@ def read_config(abc, maiusculas, raiz, lang, entradax, saidax, fentrada, fsaida,
 
 # Variable que se encarga de indicar as letras que serán usadas para encriptar e desencriptar.
 # se unha letra non está e métese no texto a encriptar será eliminada do texto e encriptarase só cas que estén no abc.
+# o carácter \ serve para escapar, para poñer un escape como letra simple compre poñelo escapado (como se mostra na configuación incial).
 # Variable to set the letters that will be used to encrypt and decrypt.
 # if a letter is not in this variable and appears on the text it will be removed at encryption/decryption time.
-'''+abc+''' = abcdefghijklmnñopqrstuvwxyz
+# the character \ it is used to scape characters, to use a scape character as letter you must scape it (as show in the incial configuration)
+# abc == abcdefghiklmnñopqrstuvwxz
+'''+abc+'''  == '''+cargar_fich('../media/abc')+'''
 
 # Indica se queres que se fagan minúsculas as maiúsculas do texto de entrada.
 # Para conservalas como maiúsculas: "si", "s", "yes", "y".
@@ -84,17 +87,17 @@ def read_config(abc, maiusculas, raiz, lang, entradax, saidax, fentrada, fsaida,
 # Tells the program if you want to make the upper case letters in the text into lower case.
 # To keep them as upper case: "si", "s", "yes", "y".
 # To convert them into lower case: "non", "no", "n".
-'''+maiusculas+''' = s
+'''+maiusculas+''' == s
 
 # Directorio raiz.
 # Root directory.
-'''+raiz+''' = ..
+'''+raiz+''' == .
 
 # Indica o idioma dos diálogos.
 # Idiomas permitidos: inglés (en), galego (gl), español (es).
 # Sets the language for the dialogs.
 # Allowed languages: english (en), gallician(gl), spanish (es).
-'''+lang+''' = gl
+'''+lang+''' == gl
 
 # Indica se se colle o texto de entrada de ficheiro ou de entrada estándard.
 # Para coller datos por ficheiro: "si", "s", "yes", "y".
@@ -102,7 +105,7 @@ def read_config(abc, maiusculas, raiz, lang, entradax, saidax, fentrada, fsaida,
 # Variable that indicates whether the text to encrypt/decrypt comes from a file or standard input (stdin).
 # To get the text from a file: "si", "s", "yes", "y".
 # To get the text from stdin: "non", "no", "n".
-'''+entradax+''' = s
+'''+entradax+''' == s
 
 # indica se se mostra o texto de saida en ficheiro ou de saida estándard.
 # Para sacar datos por ficheiro: "si", "s", "yes", "y".
@@ -110,19 +113,19 @@ def read_config(abc, maiusculas, raiz, lang, entradax, saidax, fentrada, fsaida,
 # Variable that indicates whether the text to encrypt/decrypt goes to a file or standard output (stdout).
 # To set the text to a file: "si", "s", "yes", "y".
 # To set the text to stdout: "non", "no", "n".
-'''+saidax+''' = s
+'''+saidax+''' == s
 
 # Nome do ficheiro de entrada de ser usado.
 # Name of the input file if any.
-'''+fentrada+''' = entrada.txt
+'''+fentrada+''' == entrada.txt
 
 # Nome do ficheiro de saida de ser usado.
 # Name of the output file if any.
-'''+fsaida+''' = saida.txt
+'''+fsaida+''' == saida.txt
 
 # Caracter que indica a saída do programa.
 # Character to indicate the exit of the program.
-'''+carac_saida+''' = .
+'''+carac_saida+''' == .
 '''
     fich = '../.config'
     # se o ficheiro xa existe
@@ -142,7 +145,7 @@ def read_config(abc, maiusculas, raiz, lang, entradax, saidax, fentrada, fsaida,
     		cada vez que chamemos a x'''
     		x = x.strip()
     		if not x.startswith('#') and x != '':
-    			config[x.split('=')[0].strip()] = x.split('=')[1].strip()
+    			config[x.split('==')[0].strip()] = x.split('==')[1].strip()
     	return config
     # se non existe o que facemos e crealo cos valores por defecto postos na variable e recargar a operacion
     else:
@@ -171,4 +174,24 @@ def num2letra(numaros, abc):
 	# non miramos que sexa menor cá lonxitude total do abecedario porque non debería darse
 	# a posibilidade pois non é posible que o usuario toque nada entre as operacións de tradución
 	return [abc[ele] for ele in numaros]
+#------------------------------------------------------------------------------------------------
+# función que se encarga de poñer nun só espazo e da forma correcta os caracters especiais
+def especiais_abc(abc):
+	for index, elto in enumerate(abc):
+		if elto == '\\':
+			seg = abc[index+1]
+
+			if seg == '\\':
+				abc[index] = '\\'
+			elif seg == 't':
+				abc[index] = '\t'
+			elif seg == 'n':
+				abc[index] = '\n'
+			elif seg == 'v':
+				abc[index] = '\v'
+			elif seg == 'f':
+				abc[index] = '\f'
+
+			del abc[index+1]
+	return abc
 #------------------------------------------------------------------------------------------------
