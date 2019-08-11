@@ -68,7 +68,7 @@ class decodificar:
                     '''haille que restar un á lonxitude do texto se non creame un
                     caracter no medio extra sen sentido ningún.
                     '''
-                    if lonx_chave__+index<self.__lonxitude_texto-1:
+                    if lonx_chave__+index<self.__lonxitude_texto:
                         ''' facemos a resta do elemento co seu correspondente módulo e
                         engadímolo á autochave para que continue ata a lonxitude do texto'''
                         self.__autochave.append(((self.__texto_decodificado[lonx_chave__+index] - elto)%len(self.__abc)))
