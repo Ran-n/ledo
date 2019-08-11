@@ -91,7 +91,7 @@ def read_config(abc, maiusculas, raiz, lang, entradax, saidax, fentrada, fsaida,
 
 # Directorio raiz.
 # Root directory.
-'''+raiz+''' == .
+'''+raiz+''' == ..
 
 # Indica o idioma dos diálogos.
 # Idiomas permitidos: inglés (en), galego (gl), español (es).
