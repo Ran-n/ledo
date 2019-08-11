@@ -11,7 +11,7 @@ This program can be used both as a command line utility and a interactive progra
 | Bitcoin 		| bc1q4gj3t0f4aulrn7z3dtgfxrxsv5c323x5yzvz7r 	|
 
 ## Install
-git clone --recursive https://github.com/Ran-n/ledo
+git clone https://github.com/Ran-n/ledo
 
 ## Configuration
 In the configuration file (.config on the root folder) you have many elements you can tinker with that come well explained in both gallician and english.  
