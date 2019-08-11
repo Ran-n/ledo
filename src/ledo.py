@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	29/06/2019 23:00:28
-#+ Editado:	11/08/2019 17:35:15
+#+ Editado:	11/08/2019 19:43:58
 #------------------------------------------------------------------------------------------------
 import utils as u
 import dialogos as dg
@@ -131,10 +131,13 @@ if __name__=="__main__":
     if len(sys.argv)>1:
         if sys.argv[1]=='-?':
             print(_("\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]'"))
+            print(_('A orde das opcións non afecta ao funcionamento'))
             print(_(' -c = codificar'))
             print(_(' -d = descodificar'))
             print(_(' -e texto_entrada = texto a codificar ou decodificar'))
-            print(_(' -p contrasinal = contrasinal\n'))
+            print(_(' -p contrasinal = contrasinal'))
+            print(_(' -e texto de entrada = colle texto posto tras esta opción como entrada'))
+            print(_(' -i = colle o texto de entrada de standard input\n'))
 
         elif sys.argv[1]=='-h':
         	print(_("\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]'\n"))

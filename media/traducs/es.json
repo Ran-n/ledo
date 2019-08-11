@@ -5,10 +5,13 @@
   " -c = codificar": " -c = codificar",
   " -d = descodificar": " -d = descodificar",
   " -e texto_entrada = texto a codificar ou decodificar": " -e texto_entrada = texto a codificar o decodificar",
-  " -p contrasinal = contrasinal\n": " -p contraseña = contraseña\n",
+  " -p contrasinal = contrasinal": " -p contraseña = contraseña",
   "\nExecución: 'python3 main.py -c/-d -p contrasinal [-e texto_entrada] [-i]'\n": "\nEjecución: 'python3 main.py -c/-d -p contaseña [-e texto_entrada] [-i]'\n",
   "Dame máis argumentos ou separa os que xa tes.": "Dame más argumentos o separa los que ya tienes.",
   " > Codificas(c) ou decodificas(d)?: ": " > Codificas(c) o decodificas(d)?: ",
   " > Chave de cifrado: ": " > Clave de cifrado: ",
-  " > Texto a cifrar ou descifrar: ": " > Texto a cifrar o descifrar: "
+  " > Texto a cifrar ou descifrar: ": " > Texto a cifrar o descifrar: ",
+  " -e texto de entrada = colle texto posto tras esta opción como entrada": " -e texto entrada = coge el texto puesto tras la opción como entrada para la operación",
+  " -i = colle o texto de entrada de standard input\n": " -i = coge el texto de entrada de standard input",
+  "A orde das opcións non afecta ao funcionamento": "El orden de las opciones no afecta al funcionamento del programa"
 }
