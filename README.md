@@ -24,10 +24,10 @@ python3 main.py -c/-d -p password {-e entry text} {-i}
 They may be in any order and, if spaced, must be surrounded by '' or "" (as is usual in this cases)  
 -c -> calls the code operation  
 -d -> calls the decode operation  
->> These are mutually exclusive, if used -c do not use -d and viceversa.  
+->> These are mutually exclusive, if used -c do not use -d and viceversa.  
 -e entry_text -> if configured not take text input by file you must put this option, if you put it and the configuration is set to take input from file it will be ignored  
 -i -> same as -e but the input will be taken from standard input. This is useful to chain it with unix commands like echo, sed, etc  
->> These are mutually exclusive, if used -e the -i option will be ignored.  
+->> These are mutually exclusive, if used -e the -i option will be ignored.  
 
 ### For the interactive version
 python3 main.py  
